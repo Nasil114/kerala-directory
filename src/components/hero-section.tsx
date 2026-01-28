@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Search, ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -8,9 +9,21 @@ import { SearchModal } from "./search-modal";
 export function HeroSection() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     return (
-        <section className="relative overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32">
+        <section className="relative isolate overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32 min-h-[600px] flex items-center">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 -z-10">
+                <Image
+                    src="/bg-kerala.png"
+                    alt="Kerala Background"
+                    fill
+                    className="object-cover opacity-70"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/40 to-background" />
+            </div>
+
             {/* Background Gradients */}
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green-100 via-background to-background opacity-70 dark:from-green-900/20" />
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green-100 via-transparent to-transparent opacity-40 dark:from-green-900/10" />
             <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[100px]" />
             <div className="absolute bottom-0 left-0 -z-10 h-[500px] w-[500px] rounded-full bg-accent/10 blur-[100px]" />
 
@@ -20,7 +33,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary backdrop-blur-sm"
+                        className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/40 bg-white px-3 py-1 text-xs font-bold text-primary shadow-[0_0_20px_rgba(255,255,255,0.8)] backdrop-blur-sm"
                     >
                         <Sparkles className="h-3 w-3" />
                         <span>All Kerala Services in One Place</span>
@@ -39,7 +52,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="mb-10 text-lg text-muted-foreground md:text-xl"
+                        className="mb-10 text-lg font-bold text-foreground md:text-xl"
                     >
                         വിദ്യാഭ്യാസം, ആരോഗ്യം, തൊഴിൽ, മറ്റ് സർക്കാർ സേവനങ്ങൾ എന്നിവയെല്ലാം
                         എളുപ്പത്തിൽ കണ്ടെത്താം.

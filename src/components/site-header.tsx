@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Search, Menu } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -13,9 +14,14 @@ export function SiteHeader() {
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-8">
-                <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent-dark text-white shadow-lg shadow-primary/20">
-                        <span className="text-xl font-bold">K</span>
+                <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+                    <div className="relative h-10 w-10 overflow-hidden rounded-xl shadow-lg shadow-primary/20">
+                        <Image
+                            src="/kerala-logo.svg"
+                            alt="Kerala Directory Logo"
+                            fill
+                            className="object-cover"
+                        />
                     </div>
                     <div className="flex flex-col">
                         <span className="text-sm font-bold text-foreground leading-tight">
@@ -25,7 +31,7 @@ export function SiteHeader() {
                             സേവനങ്ങളും വിഭവങ്ങളും
                         </span>
                     </div>
-                </div>
+                </Link>
 
                 <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
                     <Link href="/" className="hover:text-primary transition-colors">
