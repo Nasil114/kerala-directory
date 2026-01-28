@@ -43,7 +43,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="mb-6 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl"
+                        className="mb-6 text-3xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl"
                     >
                         കേരളത്തിനായുള്ള <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-600">ഡിജിറ്റൽ ജാലകം</span>
                     </motion.h1>
@@ -52,7 +52,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="mb-10 text-lg font-bold text-foreground md:text-xl"
+                        className="mb-10 text-base font-bold text-foreground sm:text-lg md:text-xl"
                     >
                         വിദ്യാഭ്യാസം, ആരോഗ്യം, തൊഴിൽ, മറ്റ് സർക്കാർ സേവനങ്ങൾ എന്നിവയെല്ലാം
                         എളുപ്പത്തിൽ കണ്ടെത്താം.
@@ -64,7 +64,7 @@ export function HeroSection() {
                         transition={{ duration: 0.5, delay: 0.3 }}
                         className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
                     >
-                        <div className="relative w-full max-w-md">
+                        <div className="relative w-full max-w-xl">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                                 <Search className="h-5 w-5 text-muted-foreground" />
                             </div>
@@ -77,9 +77,10 @@ export function HeroSection() {
                             />
                             <button
                                 onClick={() => setIsSearchOpen(true)}
-                                className="absolute right-2 top-2 bottom-2 rounded-xl bg-primary px-4 font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+                                className="absolute right-2 top-2 bottom-2 rounded-xl bg-primary px-3 sm:px-4 font-medium text-sm sm:text-base text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
                             >
-                                തിരയുക
+                                <span className="hidden sm:inline">തിരയുക</span>
+                                <span className="sm:hidden">തിരയുക</span>
                             </button>
                         </div>
                         <SearchModal

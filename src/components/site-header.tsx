@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Search, Menu } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { SearchModal } from "./search-modal";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function SiteHeader() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,10 +61,10 @@ export function SiteHeader() {
                     />
 
                     <button
-                        className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+                        className="md:hidden p-2 text-muted-foreground hover:text-foreground z-50"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
-                        <Menu className="h-6 w-6" />
+                        {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                     </button>
 
                     <Link
@@ -74,6 +75,72 @@ export function SiteHeader() {
                     </Link>
                 </div>
             </div>
+
+            {/* Mobile Menu Drawer */}
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden"
+                        />
+                        <motion.div
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-background p-6 shadow-xl md:hidden flex flex-col"
+                        >
+                            <div className="flex items-center justify-between mb-8">
+                                <span className="font-bold text-lg">Menu</span>
+                                <button
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="p-2 text-muted-foreground hover:text-foreground"
+                                >
+                                    <X className="h-6 w-6" />
+                                </button>
+                            </div>
+
+                            <nav className="flex flex-col gap-4 text-lg font-medium">
+                                <Link
+                                    href="/"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="px-4 py-3 rounded-xl hover:bg-secondary/50 transition-colors"
+                                >
+                                    ഹോം (Home)
+                                </Link>
+                                <Link
+                                    href="/services"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="px-4 py-3 rounded-xl hover:bg-secondary/50 transition-colors"
+                                >
+                                    സേവനങ്ങൾ (Services)
+                                </Link>
+                                <Link
+                                    href="/about"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="px-4 py-3 rounded-xl hover:bg-secondary/50 transition-colors"
+                                >
+                                    ഞങ്ങളെക്കുറിച്ച് (About)
+                                </Link>
+                            </nav>
+
+                            <div className="mt-auto pt-6 border-t border-border">
+                                <Link
+                                    href="/login"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="flex h-12 items-center justify-center rounded-xl bg-primary px-6 font-semibold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all active:scale-95"
+                                >
+                                    ലോഗിൻ (Login)
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
         </header>
     );
 }
